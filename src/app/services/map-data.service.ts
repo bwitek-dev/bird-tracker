@@ -20,7 +20,7 @@ export class MapDataService {
       headers: new HttpHeaders({ 'x-ebirdapitoken': environment.apiKey })
     };
 
-    this.httpClient.get<Bird[]>(`${environment.apiBirdLocations}/US/recent/${birdName}`, httpOptions)
+    this.httpClient.get<Bird[]>(`${environment.apiBirdLocations}/PL/recent/${birdName}`, httpOptions)
         .subscribe(birdResult => {
           this.dataSource.next(birdResult);
         });

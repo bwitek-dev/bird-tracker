@@ -10,7 +10,7 @@ import * as L from 'leaflet';
   styleUrls: ['./map.component.scss'],
 })
 export class MapComponent implements OnInit {
-  private map: L.Map | null = null;
+  private map!: L.Map;
   birds!:Bird[];
 
   constructor(private mapData:MapDataService) { }
@@ -24,9 +24,15 @@ export class MapComponent implements OnInit {
   }).addTo(this.map);
 
   //subscribe to bird data
-  this.mapData.data.subscribe(mapData => this.birds = mapData);
+  this.mapData.data.subscribe(mapData => {
+    this.birds = mapData;
+    this.populateMap();
+  });
   }
 
+  populateMap(){
+    this.birds.forEach(bird=>L.marker([bird.lat, bird.lng]).addTo(this.map).bindPopup(bird.comName+' '+bird.howMany+' '+bird.locName));
+  }
 
 
 

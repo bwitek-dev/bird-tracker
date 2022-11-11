@@ -7,10 +7,20 @@ import { MapDataService } from '../../services/map-data.service';
   styleUrls: ['./search.component.scss']
 })
 export class SearchComponent implements OnInit {
-  birdName!: string;
+  birdName: string = '';
+  // test data
+  birdsTaxonomy = ["One", "Oli", "Decimetr", "metr", "metronom"];
+  filteredTaxonomy!:string[];
+
   constructor(private mapData: MapDataService) { }
 
   ngOnInit(): void {
+    this.filterTaxonomy();
+  }
+
+  filterTaxonomy(){
+    const lowerCaseBirdName = this.birdName.toLowerCase();
+    this.filteredTaxonomy = this.birdsTaxonomy.filter(name => name.toLowerCase().includes(lowerCaseBirdName));
   }
 
   submitBirdName(){

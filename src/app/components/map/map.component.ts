@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { MapDataService } from '../../services/map-data.service';
-import { Bird } from '../../Data/Bird';
+import { Bird } from '../../data/Bird';
 import * as L from 'leaflet';
 
 @Component({

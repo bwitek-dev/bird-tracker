@@ -1,4 +1,4 @@
-export class Bird{
+export class BirdLocation{
     speciesCode!: string;
     comName!: string;
     sciName!: string;

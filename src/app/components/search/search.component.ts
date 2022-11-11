@@ -9,7 +9,7 @@ import { MapDataService } from '../../services/map-data.service';
 export class SearchComponent implements OnInit {
   birdName: string = '';
   // test data
-  birdsTaxonomy = ["One", "Oli", "Decimetr", "metr", "metronom"];
+  birdsTaxonomy = ["comrav", "One", "Oli", "Decimetr", "metr", "metronom"];
   filteredTaxonomy!:string[];
 
   constructor(private mapData: MapDataService) { }
@@ -24,7 +24,7 @@ export class SearchComponent implements OnInit {
   }
 
   submitBirdName(){
-    this.mapData.getBirdData(this.birdName);
+    this.mapData.getBirdLocationData(this.birdName);
   }
 
 }

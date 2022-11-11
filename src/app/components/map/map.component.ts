@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { MapDataService } from '../../services/map-data.service';
-import { Bird } from '../../data/Bird';
+import { BirdLocation } from '../../data/BirdLocation';
 import * as L from 'leaflet';
 
 @Component({
@@ -11,7 +11,7 @@ import * as L from 'leaflet';
 })
 export class MapComponent implements OnInit {
   private map!: L.Map;
-  birds!:Bird[];
+  birds!:BirdLocation[];
 
   constructor(private mapData:MapDataService) { }
 

@@ -3,26 +3,26 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
-import { Bird } from '../data/Bird';
+import { BirdLocation } from '../data/BirdLocation';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class MapDataService {
-  private dataSource = new BehaviorSubject<Bird[]>([]);
+  private dataSource = new BehaviorSubject<BirdLocation[]>([]);
   data = this.dataSource.asObservable();
 
   constructor(private httpClient: HttpClient) { }
 
-  getBirdData(birdName:string){
+  getBirdLocationData(speciesCode:string){
     const httpOptions = {
       headers: new HttpHeaders({ 'x-ebirdapitoken': environment.apiKey })
     };
 
-    this.httpClient.get<Bird[]>(`${environment.apiBirdLocations}/PL/recent/${birdName}`, httpOptions)
-        .subscribe(birdResult => {
-          this.dataSource.next(birdResult);
+    this.httpClient.get<BirdLocation[]>(`${environment.apiBirdLocations}/PL/recent/${speciesCode}`, httpOptions)
+        .subscribe(birdLocation=> {
+          this.dataSource.next(birdLocation);
         });
   }
 }

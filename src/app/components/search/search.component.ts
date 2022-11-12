@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { MapDataService } from '../../services/map-data.service';
+import { MapDataService } from '../../services/map-data/map-data.service';
+
+import { TaxonomyService } from 'src/app/services/taxonomy/taxonomy.service';
+import { BirdInfo } from 'src/app/data/BirdInfo';
 
 @Component({
   selector: 'app-search',
@@ -8,22 +11,34 @@ import { MapDataService } from '../../services/map-data.service';
 })
 export class SearchComponent implements OnInit {
   birdName: string = '';
-  // test data
-  birdsTaxonomy = ["comrav", "One", "Oli", "Decimetr", "metr", "metronom"];
-  filteredTaxonomy!:string[];
 
-  constructor(private mapData: MapDataService) { }
+  birdsTaxonomy: BirdInfo[] = [];
+  filteredTaxonomy: BirdInfo[] = [];
+
+  constructor(private mapData: MapDataService, private taxonomyService: TaxonomyService) { }
 
   ngOnInit(): void {
-    this.filterTaxonomy();
+    this.taxonomyService.getTaxonomy().subscribe(taxonomy => {
+      this.birdsTaxonomy = taxonomy;
+    });
   }
 
-  filterTaxonomy(){
+  private isLongEnough(testCondition: string, minLength: number): boolean{
+    return testCondition.length >= minLength;
+  }
+
+  filterTaxonomy(): void{
     const lowerCaseBirdName = this.birdName.toLowerCase();
-    this.filteredTaxonomy = this.birdsTaxonomy.filter(name => name.toLowerCase().includes(lowerCaseBirdName));
+
+    if(this.isLongEnough(this.birdName, 3)){
+      this.filteredTaxonomy = this.birdsTaxonomy.filter(birdTaxon =>
+        birdTaxon.speciesCode.toLowerCase().includes(lowerCaseBirdName)
+         || birdTaxon.comName.toLowerCase().includes(lowerCaseBirdName)
+         || birdTaxon.sciName.toLowerCase().includes(lowerCaseBirdName));
+    }
   }
 
-  submitBirdName(){
+  submitBirdName(): void{
     this.mapData.getBirdLocationData(this.birdName);
   }
 

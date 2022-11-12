@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
-import { BirdLocation } from '../data/BirdLocation';
+import { BirdLocation } from '../../data/BirdLocation';
 
 
 @Injectable({

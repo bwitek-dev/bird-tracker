@@ -7,6 +7,7 @@ const apiUrl = "https://api.ebird.org/v2";
 export const environment = {
   production: false,
   apiBirdLocations: `${apiUrl}/data/obs`,
+  apiBirdTaxonomy: `${apiUrl}/ref/taxonomy/ebird?fmt=json`,
   apiKey: apiKey
 };
 

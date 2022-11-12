@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { MapDataService } from '../../services/map-data.service';
+import { MapDataService } from '../../services/map-data/map-data.service';
 import { BirdLocation } from '../../data/BirdLocation';
 import * as L from 'leaflet';
 

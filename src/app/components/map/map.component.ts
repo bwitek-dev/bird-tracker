@@ -11,13 +11,16 @@ import * as L from 'leaflet';
 })
 export class MapComponent implements OnInit {
   private map!: L.Map;
-  birds!:BirdLocation[];
+  private birdLocationsLayer = new L.LayerGroup();
+  birds:BirdLocation[] = [];
 
   constructor(private mapData:MapDataService) { }
 
   ngOnInit(): void {
     //init map
     this.map = L.map('map').setView([51.505, -0.09], 13);
+    this.birdLocationsLayer.addTo(this.map);
+
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
@@ -30,8 +33,13 @@ export class MapComponent implements OnInit {
   });
   }
 
-  populateMap(){
-    this.birds.forEach(bird=>L.marker([bird.lat, bird.lng]).addTo(this.map).bindPopup(bird.comName+' '+bird.howMany+' '+bird.locName));
+  populateMap(): void{
+    this.clearMapMarkers();
+    this.birds.forEach(bird=>L.marker([bird.lat, bird.lng]).addTo(this.birdLocationsLayer).bindPopup(bird.comName+' '+bird.howMany+' '+bird.locName));
+  }
+
+  clearMapMarkers(): void{
+    this.birdLocationsLayer.clearLayers();
   }
 
 

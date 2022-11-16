@@ -15,12 +15,12 @@ export class MapDataService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getBirdLocationData(speciesCode:string){
+  getBirdLocationData(speciesCode: string, countryCode: string){
     const httpOptions = {
       headers: new HttpHeaders({ 'x-ebirdapitoken': environment.apiKey })
     };
 
-    this.httpClient.get<BirdLocation[]>(`${environment.apiBirdLocations}/PL/recent/${speciesCode}`, httpOptions)
+    this.httpClient.get<BirdLocation[]>(`${environment.apiBirdLocations}/${countryCode.toUpperCase()}/recent/${speciesCode}`, httpOptions)
         .subscribe(birdLocation=> {
           this.dataSource.next(birdLocation);
         });

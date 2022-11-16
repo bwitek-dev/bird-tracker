@@ -1,7 +1,13 @@
 <div id="searchbar" class="flex flex-row justify-end">
-    <input type="search" name="birdName" id="birdName" (input)="filterTaxonomy()" [(ngModel)]="birdName" placeholder="e.g Corvus" [matAutocomplete]="auto" class="rounded-l-sm px-2 py-0.5 w-full box-border text-slate-700">
-    <mat-autocomplete #auto="matAutocomplete">
+    <input type="search" name="birdName" id="birdName" (input)="filterTaxonomy()" [(ngModel)]="birdName" placeholder="e.g Corvus" [matAutocomplete]="bird" class="rounded-l-sm px-2 py-0.5 w-full box-border text-slate-700">
+    <mat-autocomplete #bird="matAutocomplete">
         <mat-option *ngFor="for let bird of filteredTaxonomy" [value]="bird.speciesCode">{{bird.comName}}</mat-option>
     </mat-autocomplete>
-    <button type="button" (click)="submitBirdName()" class="capitalize bg-green-700 text-slate-200 px-2 py-0.5 rounded-r-sm hover:bg-green-800">search</button>
+
+    <input type="search" name="countryCode" id="countryCode" (input)="filterCountries()" [(ngModel)]="countryCode" placeholder="e.g Poland" [matAutocomplete]="country" class="rounded-l-sm px-2 py-0.5 w-full box-border text-slate-700">
+    <mat-autocomplete #country="matAutocomplete">
+        <mat-option *ngFor="for let country of filteredCountries" [value]="country.cca2">{{country.en}}</mat-option>
+    </mat-autocomplete>
+
+    <button type="button" (click)="submitSearch()" class="capitalize bg-green-700 text-slate-200 px-2 py-0.5 rounded-r-sm hover:bg-green-800">search</button>
 </div>

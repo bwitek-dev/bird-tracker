@@ -2,12 +2,14 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 import apiKey from "./api";
-const apiUrl = "https://api.ebird.org/v2";
+const birdApiUrl = "https://api.ebird.org/v2";
+const countriesApi = "https://restcountries.com/v3.1"
 
 export const environment = {
   production: false,
-  apiBirdLocations: `${apiUrl}/data/obs`,
-  apiBirdTaxonomy: `${apiUrl}/ref/taxonomy/ebird?fmt=json`,
+  apiBirdLocations: `${birdApiUrl}/data/obs`,
+  apiBirdTaxonomy: `${birdApiUrl}/ref/taxonomy/ebird?fmt=json`,
+  apiAllCountries : `${countriesApi}/all`,
   apiKey: apiKey
 };
 

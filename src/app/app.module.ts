@@ -9,14 +9,16 @@ import { HeaderComponent } from './components/header/header.component';
 import { MapComponent } from './components/map/map.component';
 import { SearchComponent } from './components/search/search.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatAutocompleteModule } from '@angular/material/autocomplete'; 
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { BirdPopupComponent } from './components/bird-popup/bird-popup.component'; 
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     MapComponent,
-    SearchComponent
+    SearchComponent,
+    BirdPopupComponent
   ],
   imports: [
     BrowserModule,

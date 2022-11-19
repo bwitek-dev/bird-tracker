@@ -39,3 +39,18 @@ $bird-tracker-theme: mat.define-light-theme((
 @tailwind utilities;
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+//leaflet popup
+.leaflet-popup-content, .leaflet-popup-content p{
+  margin: 0 !important;
+}
+.leaflet-popup-content-wrapper{
+  padding: 0 !important;
+}
+.leaflet-container a.leaflet-popup-close-button{
+  color: rgb(20 83 45 / 0.7) !important;
+}
+.leaflet-container a.leaflet-popup-close-button:hover{
+  color: rgb(20 83 45 / 1) !important;
+}

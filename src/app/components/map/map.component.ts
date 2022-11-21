@@ -12,6 +12,7 @@ import * as L from 'leaflet';
 })
 export class MapComponent implements OnInit {
   private map!: L.Map;
+  private markerIcon!: L.Icon;
   private birdLocationsLayer = new L.LayerGroup();
   birds:BirdLocation[] = [];
 
@@ -27,6 +28,14 @@ export class MapComponent implements OnInit {
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
   }).addTo(this.map);
 
+    //init marker icon
+    this.markerIcon = L.icon({
+      iconUrl: 'assets/bird-marker.svg',
+      iconSize: [40, 40], // size of the icon
+      iconAnchor:   [22, 40], // point of the icon which will correspond to marker's location
+      popupAnchor:  [-12, -38] // point from which the popup should open relative to the iconAnchor
+  });
+
   //subscribe to bird data
   this.mapData.data.subscribe(mapData => {
     this.birds = mapData;
@@ -36,7 +45,7 @@ export class MapComponent implements OnInit {
 
   populateMap(): void{
     this.clearMapMarkers();
-    this.birds.forEach(bird=>L.marker([bird.lat, bird.lng]).addTo(this.birdLocationsLayer).bindPopup(
+    this.birds.forEach(bird=>L.marker([bird.lat, bird.lng], {icon: this.markerIcon}).addTo(this.birdLocationsLayer).bindPopup(
       this.compilePopup(BirdPopupComponent, 
         (c: any) => {c.instance.birdSpot = bird})
       ));

@@ -25,15 +25,4 @@ export class MapDataService {
           this.dataSource.next(birdLocation);
         });
   }
-
-  getCurrentDeviceLocation(): Promise<number[]>{
-    return new Promise((resolve, reject) => {
-      navigator.geolocation.getCurrentPosition(response => {
-          resolve([response.coords.latitude, response.coords.longitude]);
-        },
-        error => {
-          reject(error);
-        });
-    });
-  }
 }

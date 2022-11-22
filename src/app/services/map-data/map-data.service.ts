@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Subject, BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 import { BirdLocation } from '../../data/BirdLocation';
@@ -24,5 +24,16 @@ export class MapDataService {
         .subscribe(birdLocation=> {
           this.dataSource.next(birdLocation);
         });
+  }
+
+  getCurrentDeviceLocation(): Promise<number[]>{
+    return new Promise((resolve, reject) => {
+      navigator.geolocation.getCurrentPosition(response => {
+          resolve([response.coords.latitude, response.coords.longitude]);
+        },
+        error => {
+          reject(error);
+        });
+    });
   }
 }

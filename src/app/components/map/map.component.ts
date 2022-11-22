@@ -20,14 +20,21 @@ export class MapComponent implements OnInit {
 
   ngOnInit(): void {
     //init map
-    this.map = L.map('map').setView([51.505, -0.09], 13);
-    this.birdLocationsLayer.addTo(this.map);
+    this.mapData.getCurrentDeviceLocation()
+    .then(position => {
+      this.map = L.map('map').setView([position[0], position[1]], 9);
+    })
+    .catch(() =>{
+      this.map = L.map('map').setView([0, 0], 9);
+    })
+    .finally(()=>{
+      this.birdLocationsLayer.addTo(this.map);
 
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 19,
-      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-  }).addTo(this.map);
-
+      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+      }).addTo(this.map);
+    });
     //init marker icon
     this.markerIcon = L.icon({
       iconUrl: 'assets/bird-marker.svg',
@@ -45,6 +52,7 @@ export class MapComponent implements OnInit {
 
   populateMap(): void{
     this.clearMapMarkers();
+
     this.birds.forEach(bird=>L.marker([bird.lat, bird.lng], {icon: this.markerIcon}).addTo(this.birdLocationsLayer).bindPopup(
       this.compilePopup(BirdPopupComponent, 
         (c: any) => {c.instance.birdSpot = bird})
@@ -65,7 +73,6 @@ export class MapComponent implements OnInit {
     div.appendChild(compRef.location.nativeElement);
     return div;
   }
-
   clearMapMarkers(): void{
     this.birdLocationsLayer.clearLayers();
   }

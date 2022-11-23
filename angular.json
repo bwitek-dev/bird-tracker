@@ -4,6 +4,11 @@
   "newProjectRoot": "projects",
   "projects": {
     "bird-tracker": {
+      "i18n": {
+        "locales": {
+          "pl": "src/assets/locales/messages.pl.json"
+        }
+      },
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,6 +22,9 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "localize":[
+              "pl"
+            ],
             "outputPath": "dist/bird-tracker",
             "index": "src/index.html",
             "main": "src/main.ts",

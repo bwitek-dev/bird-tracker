@@ -13,6 +13,8 @@ export class MapDataService {
   private dataSource = new BehaviorSubject<BirdLocation[]>([]);
   data = this.dataSource.asObservable();
 
+  private sppLocale: string = $localize `en`;
+
   constructor(private httpClient: HttpClient) { }
 
   getBirdLocationData(speciesCode: string, countryCode: string){
@@ -20,7 +22,7 @@ export class MapDataService {
       headers: new HttpHeaders({ 'x-ebirdapitoken': environment.apiKey })
     };
 
-    this.httpClient.get<BirdLocation[]>(`${environment.apiBirdLocations}/${countryCode.toUpperCase()}/recent/${speciesCode}`, httpOptions)
+    this.httpClient.get<BirdLocation[]>(`${environment.apiBirdLocations}/${countryCode.toUpperCase()}/recent/${speciesCode}?sppLocale=${this.sppLocale}`, httpOptions)
         .subscribe(birdLocation=> {
           this.dataSource.next(birdLocation);
         });

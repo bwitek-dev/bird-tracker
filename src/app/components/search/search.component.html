@@ -1,20 +1,20 @@
 <form (submit)="submitSearch()" class="flex flex-row justify-end divide-x">
 
     <div class="relative basis-7/12">
-        <input type="search" name="birdName" id="birdName" (input)="filterTaxonomy()" [(ngModel)]="birdName" placeholder="Specie code" [matAutocomplete]="bird" class="peer rounded-l-sm focus:outline-none px-2 py-0.5 w-full box-border text-slate-700 placeholder-transparent">
+        <input type="search" name="birdName" id="birdName" (input)="filterTaxonomy()" [(ngModel)]="birdName" placeholder="Specie code" i18n-placeholder [matAutocomplete]="bird" class="peer rounded-l-sm focus:outline-none px-2 py-0.5 w-full box-border text-slate-700 placeholder-transparent">
         <mat-autocomplete #bird="matAutocomplete">
-            <mat-option *ngFor="for let bird of filteredTaxonomy" [title]="bird.comName" [value]="bird.speciesCode">{{bird.comName}}</mat-option>
+            <mat-option *ngFor="for let bird of filteredTaxonomy" [title]="bird.comName" [value]="bird.speciesCode" class="capitalize">{{bird.comName}}</mat-option>
         </mat-autocomplete>
-        <label for="birdName" class="absolute bottom-7 left-2 text-sm text-green-900 peer-placeholder-shown:bottom-0.5 peer-placeholder-shown:text-slate-500 peer-placeholder-shown:text-base transition-all">Specie code</label>
+        <label i18n for="birdName" class="absolute bottom-7 left-2 text-sm text-green-900 peer-placeholder-shown:bottom-0.5 peer-placeholder-shown:text-slate-500 peer-placeholder-shown:text-base transition-all">Specie code</label>
     </div>
 
     <div class="relative basis-5/12">
-        <input type="search" name="countryCode" id="countryCode" (input)="filterCountries()" [(ngModel)]="countryCode" placeholder="Country code" [matAutocomplete]="country" class="peer focus:outline-none px-2 py-0.5 w-full box-border text-slate-700 placeholder-transparent">
+        <input type="search" name="countryCode" id="countryCode" (input)="filterCountries()" [(ngModel)]="countryCode" placeholder="Country code" i18n-placeholder [matAutocomplete]="country" class="peer focus:outline-none px-2 py-0.5 w-full box-border text-slate-700 placeholder-transparent">
         <mat-autocomplete #country="matAutocomplete">
-            <mat-option *ngFor="for let country of filteredCountries" [title]="country.en" [value]="country.cca2">{{country.en}}</mat-option>
+            <mat-option class="capitalize" *ngFor="for let country of filteredCountries" [title]="country.en+' ('+country.pol+')'" [value]="country.cca2">{{country.en+' ('+country.pol+')'}}</mat-option>
         </mat-autocomplete>
-        <label for="countryCode" class="absolute bottom-7 left-2 text-sm text-green-900 peer-placeholder-shown:bottom-0.5 peer-placeholder-shown:text-slate-500 peer-placeholder-shown:text-base transition-all">Country code</label>
+        <label i18n for="countryCode" class="absolute bottom-7 left-2 text-sm text-green-900 peer-placeholder-shown:bottom-0.5 peer-placeholder-shown:text-slate-500 peer-placeholder-shown:text-base transition-all">Country code</label>
     </div>
 
-    <button type="submit" class="capitalize bg-green-700 text-slate-200 px-2 py-0.5 rounded-r-sm hover:bg-green-800 transition-all">search</button>
+    <button i18n type="submit" class="capitalize bg-green-700 text-slate-200 px-2 py-0.5 rounded-r-sm hover:bg-green-800 transition-all">search</button>
 </form>

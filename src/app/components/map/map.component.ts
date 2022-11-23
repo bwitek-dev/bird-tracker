@@ -45,11 +45,17 @@ export class MapComponent implements OnInit {
 
   populateMap(): void{
     this.clearMapMarkers();
+    let mapViewBounds: any[] = [];
 
-    this.birds.forEach(bird=>L.marker([bird.lat, bird.lng], {icon: this.markerIcon}).addTo(this.birdLocationsLayer).bindPopup(
-      this.compilePopup(BirdPopupComponent, 
-        (c: any) => {c.instance.birdSpot = bird})
-      ));
+    this.birds.forEach(bird => {
+      mapViewBounds.push([bird.lat, bird.lng]);
+      L.marker([bird.lat, bird.lng], { icon: this.markerIcon }).addTo(this.birdLocationsLayer).bindPopup(
+        this.compilePopup(BirdPopupComponent,
+          (c: any) => { c.instance.birdSpot = bird })
+      )
+    });
+    
+    this.fitMapViewBounds(mapViewBounds);
   }
 
   private compilePopup(component: any, onAttach: any): any {
@@ -66,7 +72,10 @@ export class MapComponent implements OnInit {
     div.appendChild(compRef.location.nativeElement);
     return div;
   }
-  clearMapMarkers(): void{
+  private fitMapViewBounds(mapViewBounds: any[]): void{
+    this.map.fitBounds(mapViewBounds);
+  }
+  private clearMapMarkers(): void{
     this.birdLocationsLayer.clearLayers();
   }
 

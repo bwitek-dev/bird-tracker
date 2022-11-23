@@ -1,6 +1,10 @@
 <div>
     <header class="flex flex-col bg-green-600 border-b-2 border-green-800/40 text-green-900 p-3 rounded-t-md text-center">
-        <h3 class="font-bold">{{birdSpot.comName+' ('+birdSpot.speciesCode+')'}}</h3>
+        <h3 class="font-bold capitalize">{{birdSpot.comName}}
+            <span class="lowercase">
+                {{' ('+birdSpot.speciesCode+')'}}
+            </span>
+        </h3>
         <h4>{{birdSpot.sciName}}</h4>
     </header>
     <div class="px-3 text-right divide-y-2 flex flex-col">

@@ -3,7 +3,7 @@
     <div class="relative basis-7/12">
         <input type="search" name="birdName" id="birdName" (input)="filterTaxonomy()" [(ngModel)]="birdName" placeholder="Specie code" i18n-placeholder [matAutocomplete]="bird" class="peer rounded-l-sm focus:outline-none px-2 py-0.5 w-full box-border text-slate-700 placeholder-transparent">
         <mat-autocomplete #bird="matAutocomplete">
-            <mat-option *ngFor="for let bird of filteredTaxonomy" [title]="bird.comName" [value]="bird.speciesCode">{{bird.comName}}</mat-option>
+            <mat-option *ngFor="for let bird of filteredTaxonomy" [title]="bird.comName" [value]="bird.speciesCode" class="capitalize">{{bird.comName}}</mat-option>
         </mat-autocomplete>
         <label i18n for="birdName" class="absolute bottom-7 left-2 text-sm text-green-900 peer-placeholder-shown:bottom-0.5 peer-placeholder-shown:text-slate-500 peer-placeholder-shown:text-base transition-all">Specie code</label>
     </div>

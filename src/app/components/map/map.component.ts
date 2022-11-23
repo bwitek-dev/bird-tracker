@@ -73,7 +73,9 @@ export class MapComponent implements OnInit {
     return div;
   }
   private fitMapViewBounds(mapViewBounds: any[]): void{
-    this.map.fitBounds(mapViewBounds);
+    if(mapViewBounds.length > 0){
+      this.map.fitBounds(mapViewBounds);
+    }
   }
   private clearMapMarkers(): void{
     this.birdLocationsLayer.clearLayers();

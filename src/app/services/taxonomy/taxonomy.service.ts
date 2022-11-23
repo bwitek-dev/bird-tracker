@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class TaxonomyService {
+  private sppLocale: string = $localize `en`;
 
   constructor(private httpClient: HttpClient) { }
 
@@ -17,6 +18,6 @@ export class TaxonomyService {
       headers: new HttpHeaders({ 'x-ebirdapitoken': environment.apiKey })
     };
 
-    return this.httpClient.get<BirdInfo[]>(`${environment.apiBirdTaxonomy}`, httpOptions);
+    return this.httpClient.get<BirdInfo[]>(`${environment.apiBirdTaxonomy}&locale=${this.sppLocale}`, httpOptions);
   }
 }

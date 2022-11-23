@@ -11,7 +11,7 @@
     <div class="relative basis-5/12">
         <input type="search" name="countryCode" id="countryCode" (input)="filterCountries()" [(ngModel)]="countryCode" placeholder="Country code" i18n-placeholder [matAutocomplete]="country" class="peer focus:outline-none px-2 py-0.5 w-full box-border text-slate-700 placeholder-transparent">
         <mat-autocomplete #country="matAutocomplete">
-            <mat-option *ngFor="for let country of filteredCountries" [title]="country.en" [value]="country.cca2">{{country.en}}</mat-option>
+            <mat-option class="capitalize" *ngFor="for let country of filteredCountries" [title]="country.en+' ('+country.pol+')'" [value]="country.cca2">{{country.en+' ('+country.pol+')'}}</mat-option>
         </mat-autocomplete>
         <label i18n for="countryCode" class="absolute bottom-7 left-2 text-sm text-green-900 peer-placeholder-shown:bottom-0.5 peer-placeholder-shown:text-slate-500 peer-placeholder-shown:text-base transition-all">Country code</label>
     </div>
